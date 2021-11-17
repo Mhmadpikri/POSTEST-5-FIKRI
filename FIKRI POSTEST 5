@@ -1,0 +1,344 @@
+import datetime
+#MENU
+x = datetime.datetime.now()
+print("_" * 51)
+print("                    Cafe upik mania                    ")
+print("          Jln. sudirman ,bontang, kaltim               ")
+print("           ", (x),                            )
+print("_" * 51)
+
+menu_makanan = [
+              {"no_f" : "1", "food" : "Nasi goreng", "space" : "                 ", "food_price" : 15000},
+              {"no_f" : "2", "food" : "Mie goreng", "space" : "                  ", "food_price" : 15000},
+              {"no_f" : "3", "food" : "Nasi pecel", "space" : "                  ", "food_price" : 15000},
+              {"no_f" : "4", "food" : "Nasi kuning", "space" : "                 ", "food_price" : 15000},
+              {"no_f" : "5", "food" : "Nasi ayam", "space" : "                   ", "food_price" : 15000},]
+menu_minuman = [
+              {"no_d" : "1", "drink" : "Josua", "space" : "                      ", "drink_price" : 10000},
+              {"no_d" : "2", "drink" : "Jus mangga", "space" : "                 ", "drink_price" : 15000},
+              {"no_d" : "3", "drink" : "Mojito squash", "space" : "              ", "drink_price" : 15000},
+              {"no_d" : "4", "drink" : "Lemon squash", "space" : "               ", "drink_price" : 20000},
+              {"no_d" : "5", "drink" : "Es jeruk", "space" : "                   ", "drink_price" :  6000},
+              {"no_d" : "6", "drink" : "Es teh", "space" : "                     ", "drink_price" :  5000},]
+def show_menu() :
+    print("\n")
+    print("" * 20, "MENU ADMIN", "" * 20)
+    print()
+    print("1. Daftar Menu Cafe upik")
+    print("2. Tambahkan Menu ")
+    print("3. Hapus Menu ")
+    print("4. Ubah Menu ")
+    print("5. Keluar")
+    
+def choose_menu() :
+    print("_" * 50)
+    print("""
+                      PILIHAN
+                      
+                  1. Menu Makanan cefe upik
+                  2. Menu Minuman cafe upik""")
+
+def show_menu_makanan() :
+    if len(menu_makanan) <= 0 :
+        print("Menu Makanan Belum Tersedia")
+    else :
+        print("FOOD MENU")
+        for menu in menu_makanan:
+            print(f"{menu['no_f']}. {menu['food']} {menu['space']} ---> Rp. {menu['food_price']}")
+            
+def insert_food_menu() :
+    print("_" * 50)
+    try :
+        choose = 'y'
+        while choose == 'y' or choose == 'Y' :
+            show_menu_makanan()
+            new_food_menu = {}     
+            new_food_menu["no_f"] = int(input("Silahkan Input Nomor makanannya : "))
+            name_food = str(input("Silahkan Isi Nama Makanan Yang Ingin Ditambahkan : "))
+            new_food_menu["food"] = name_food
+            new_food_menu["space"] = ("        ")
+            new_food_menu["food_price"] = (int(input(f"Silahkan Isi Harga {name_food} : ")))   
+            menu_makanan.append(new_food_menu)
+            show_menu_makanan()
+            choose = str(input("Apakah Ingin Menambahakan Menu Lagi? "))
+    except :
+        print("\n!Kesalahan Dalam Input Data : Daftar dan Harga Adalah Angka, Nama dan Mengulang Adalah Huruf")
+        
+
+def delete_food_menu() :
+    print("_" * 50)
+    try :
+        choose = 'y'
+        while choose == 'y' or choose == 'Y' :
+            print("FOOD MENU")
+            show_menu_makanan()
+            delete_food = int(input("Silahkan Pilih Menu Makanan Yang Ingin Di Hapus, cth. 1, 2, 3 : "))
+            delete = delete_food - 1
+            del menu_makanan[delete]
+            print("\n       Daftar Menu Ke-", delete_food, " Berhasil Dihapus")
+            print("\nNEW MENU")
+            show_menu_makanan()
+            choose = str(input("Apakah Ingin Menghapus Menu Lagi? "))
+    except :
+        print("\n!Kesalahan Dalam Input Data : Pilih Menu Adalah Angka, Mengulang Adalah Huruf")
+    
+def edit_food_menu() :
+    print("_" * 50)
+    try :
+        choose = 'y'
+        while choose == 'y' or choose == 'Y' :
+            show_menu_makanan()
+            edit_food = str(input("Silahkan Pilih Menu makanan Yang Ingin Di Ubah, cth. 1, 2, 3 : "))
+            for food in menu_makanan :
+                if food['no_f'] == edit_food :
+                    change_name = str(input("Silahkan Masukkan Menu Baru : "))
+                    change_price= int(input("Silahkan Masukkan Harga Menu Baru : "))
+                    food['food'] = change_name
+                    food['food_price'] = change_price
+            
+            show_menu_makanan()
+            choose = str(input("Apakah Ingin Mengubah Menu Lagi? "))
+    except :
+        print("\n!Kesalahan Dalam Input Data : Pilih Menu Adalah Angka, Mengulang Adalah Huruf")
+        
+def show_menu_minuman() :
+    if len(menu_minuman) <= 0 :
+        print("Menu Minuman Belum Tersedia")
+    else :
+        print("          DRINKS MENU")
+        for menu in menu_minuman:
+            print(f"          {menu['no_d']}. {menu['drink']} {menu['space']} ---> Rp. {menu['drink_price']}")
+
+def insert_drinks_menu() :
+    print("_" * 50)
+    try : 
+        choose = 'y'
+        while choose == 'y' or choose == 'Y' :
+            show_menu_minuman()
+            new_drink_menu = {}     
+            new_drink_menu["no_d"] = (int(input("Silahkan Input Nomor menunya : ")))
+            name_drink = str(input("Silahkan Isi Nama Minuman Yang Ingin Ditambahkan : "))
+            new_drink_menu["drink"] = name_drink
+            new_drink_menu["space"] = ("        ")
+            new_drink_menu["drink_price"] = (int(input(f"Silahkan Isi Harga {name_drink} : ")))   
+            menu_minuman.append(new_drink_menu)
+            show_menu_minuman()
+            choose = str(input("Apakah Ingin Menambahakan Menu Lagi? "))
+    except :
+        print("\n!Kesalahan Dalam Input Data : Daftar dan Harga Adalah Angka, Nama dan Mengulang Adalah Huruf")
+    print("_________________")
+    
+def delete_drinks_menu() :
+    print("_" * 50)
+    try :
+        choose = 'y'
+        while choose == 'y' or choose == 'Y' :
+            show_menu_minuman()
+            delete_drink = int(input("Silahkan Pilih Menu Makanan Yang Ingin Di Hapus, cth. 1, 2, 3 : "))
+            delete = delete_drink - 1
+            del menu_minuman[delete]
+            print("\n       Daftar Menu Ke-", delete_drink, " Berhasil Dihapus")
+            print("\nNEW MENU")
+            show_menu_minuman()
+            choose = str(input("Apakah Ingin Menghapus Menu Lagi? "))
+    except :
+        print("!Kesalahan Dalam Input Data : Pilih Menu Adalah Angka, Mengulang Adalah Huruf")
+def edit_drinks_menu() :
+    print("_" * 50)
+    try :
+        choose = 'y'
+        while choose == 'y' or choose == 'Y' :
+            show_menu_minuman()
+            edit_drink = str(input("Silahkan Pilih Menu makanan Yang Ingin Di Ubah, cth. 1, 2, 3 : "))
+            for drink in menu_minuman :
+                if drink['no_d'] == edit_drink :
+                    change_name = str(input("Silahkan Masukkan Menu Baru : "))
+                    change_price= int(input("Silahkan Masukkan Harga Menu Baru : "))
+                    drink['drink'] = change_name
+                    drink['drink_price'] = change_price
+            show_menu_minuman()
+            choose = str(input("Apakah Ingin Mengubah Menu Lagi? "))
+    except :
+        print("\n!Kesalahan Dalam Input Data : Daftar dan Harga Adalah Angka, Nama dan Mengulang Adalah Huruf")
+def admin_cafe() :
+    choose = 'y'
+    while choose == 'y' or choose == 'Y' :
+        show_menu()
+        menu_cafe = int(input("Silahkan Pilih Menu : "))
+        print()
+        if menu_cafe == 1 :
+            print("                    Menu Cafe upik mania                    ")
+            show_menu_makanan()
+            show_menu_minuman()
+            print ("\n               Di Atas Adalah Daftar Menu Cafe Anda")
+        elif menu_cafe == 2 :
+            choose_menu()
+            Q = int(input("Silahkan Dipilih menunya : "))
+            if Q == 1 :
+                insert_food_menu()
+            elif Q == 2 :
+                insert_drinks_menu()
+            else :
+                print("mohon maaf menu yang anda inginkan Tidak tersedia")
+        elif menu_cafe == 3 :
+            choose_menu()
+            Q = int(input("Silahkan Dipilih : "))
+            if Q == 1 :
+                delete_food_menu()
+            elif Q == 2 :
+                delete_drinks_menu()
+            else :
+                print("mohon maaf menu yang anda inginkan Tidak tersedia")
+        elif menu_cafe == 4 :
+            choose_menu()
+            Q = int(input("Silahkan Dipilih : "))
+            if Q == 1 :
+                edit_food_menu()
+            elif Q == 2 :
+                edit_drinks_menu()
+            else :
+                print("mohon maaf menu yang anda inginkan Tidak tersedia")
+        elif menu_cafe == 5 :
+            break
+        else :
+            print("Menu Tersebut Tidak Ada")
+        choose = str(input("Apakah Ingin Kembali Ke Menu Lagi? "))
+def customer_cafe() :
+    try :
+        print("_______WELCOME_______")
+        show_menu_makanan()
+        show_menu_minuman()
+    #Proses 
+    
+        list_ordered_makanan = []
+        list_ordered_minuman = []
+        greet1 = str(input("Hello, Apakah Anda Ingin Memesan Sesuatu? "))
+        
+        #Jika Belum Ingin Memesan
+        
+        if greet1 == 'n' or greet1 == 'N' :
+            greet2 = input("Apakah Ingin Menunggu Seseorang? ")
+            if greet2 :
+                print("""
+                      a. 15 menit
+                      b. 25. menit
+                      c. 45 menit""")
+                minute = [{ "kode" : "a", "min" : "15 Menit"},
+                            {"kode" : "b", "min" : "25 Menit"},
+                            {"kode" : "c", "min" : "30 menit"},]
+                greet3 = str(input("Baik, Berapa Lama? "))
+                if greet3 == 'a' or greet3 == 'b' or greet3 == 'c' :
+                    print("Baik, Ditunggu")
+                    waiting = next((sub for sub in minute if sub['kode'] == greet3), None)
+                    print(f"___Menunggu {waiting['min']} Sebelum Pemesanan___")
+                greet1 = str(input("Apakah Anda Sudah Siap Memesan? "))
+                
+        #Jika Ingin Memesan
+        
+        while greet1 == 'y' or greet1 == 'Y' :
+            print("________Pemesanan_______")
+            order = str(input("Apa Yang Ingin Anda Pesan? F/f=Food & D/d=Drink : "))
+            if order == 'f' or order == 'F' :
+                order_food = input("Silahkan Pilih Nomor Menu Makanan Yang Anda Pesan : ")
+                ordered = next((sub for sub in menu_makanan if sub['no_f'] == order_food), None)
+                total_food = int(input(f"Berapa porsi {ordered['food']}, yang ingin anda pesan? "))
+                ordered['total_food'] = int(total_food)
+                ordered['payment'] = ordered['total_food'] * ordered['food_price']
+                list_ordered_makanan.append(ordered)
+                greet1 = str(input("Apa Ada Tambahan Lagi? "))
+            elif order == 'd' or order == 'D' :
+                order_drink = input("Silahkan Pilih Nomor Menu Minuman Yang Anda Pesan : ")
+                ordered = next((sub for sub in menu_minuman if sub['no_d'] == order_drink), None)
+                total_drink = int(input(f"Berapa porsi {ordered['drink']}, yang ingin anda pesan? "))
+                ordered['total_drink'] = int(total_drink)
+                ordered['payment'] = ordered['total_drink'] * ordered['drink_price']
+                list_ordered_minuman.append(ordered)
+                greet1 = str(input("Apa Ada Tambahan Lagi? "))      
+            else :
+                print("Mohon Maaf, Menu Tersebut Tidak Ada Dalam Daftar")   
+        
+        print("_________________")
+    
+        #Proses Penjumlahan Pesanan
+        
+        total_food = 0
+        total_drinks = 0
+        for list_order in list_ordered_makanan :
+            total_food += list_order['total_food']
+        for list_order in list_ordered_minuman :
+            total_drinks += list_order['total_drink']
+            
+        #Potongan Harga Yang Di Dapatkan
+        
+        if total_food >= 2 :
+            food_discount = 5
+        else :
+            food_discount = 0
+        if total_drinks >= 3 :
+            drink_discount = 10
+        else :
+            drink_discount = 0
+        menu_discount = food_discount + drink_discount
+        if datetime.datetime.today().weekday() < 5 :
+            day_discount = 10
+        else : 
+            day_discount = 5
+        payment = str(input("Apakah Ingin Melakukan Pembayaran Melalu E-Money? "))
+        if payment == 'y' or payment == 'Y' :
+            emoney_discount = 5
+        else :
+            emoney_discount = 0
+            
+    except : 
+        print("\n!Perhatikan Lagi Inputan Anda")
+        #Proses Perhitungan Keseluruhan
+        
+    print("_________________")
+    print()
+    print("                     PEMBAYARAN                 ")
+    print("                     ----------                 ")
+    for list_order in list_ordered_makanan :
+        print(list_order['food'])
+        print(list_order['food_price'], "x", list_order['total_food'], "= RP.", list_order['payment'])
+    for list_order in list_ordered_minuman :
+        print(f"{list_order['drink']}")
+        print(f"{list_order['drink_price']} x {list_order['total_drink']} = RP. {(list_order['payment'])}")
+    print("---------------------------------------------------+")
+    total_discount = menu_discount + day_discount + emoney_discount
+    list_all_ordered = list_ordered_makanan + list_ordered_minuman
+    total_price = sum(list_order['payment'] for list_order in list_all_ordered)
+    cut_discount = total_price * total_discount / 100
+    total_payment = total_price - cut_discount
+    print("                                         RP.", total_price)
+    print("----------------------------------------------------")
+    print("Diskon Makanan :  ",  food_discount, "%")
+    print("Diskon Minuman :  ", drink_discount, "%")
+    print("Diskon Hari    :  ",   day_discount, "%")
+    print("Diskon E_Money :  ",emoney_discount, "%")
+    print("---------------------------------------------------+")
+    print("            RP.", total_price, "Diskon Sebesar", total_discount, "%")
+    print("---------------------------------------------------=")
+    print("                                Total : RP.",  total_payment)
+    print("__________________")
+    
+choose = 'y'
+while choose == 'y' or choose == 'Y' :
+    
+    print("_________________")
+    print("""               
+                1. Masuk Sebagai Admin  
+                2. Masuk sebagai Customer
+                3. Keluar
+_________________""")
+    login = int(input("Anda Ingin Masuk Sebagai Apa? "))
+    if login == 1 :
+        admin_cafe()
+    elif login == 2 :
+        customer_cafe()
+    elif login == 3 :
+        exit()
+    else :
+        print("Menu Tersebut Tidak Tersedia")
+    choose = str(input("Apakah Anda Ingin Kembali Ke Menu Login? "))
+print("\n    TERIMA KASIH TELAH DATANG DI CAFE UPIK MANIA     ")
+print("          Jln. sudirman ,bontang, kaltim               ")
